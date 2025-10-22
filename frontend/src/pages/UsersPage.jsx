@@ -31,8 +31,8 @@ export default function UsersPage() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>User Management</h1>
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">User Management</h1>
       <UserForm onSubmit={addUser} />
       <UserList users={users} onDelete={deleteUser} onUpdate={updateUser} />
     </div>
