@@ -17,8 +17,8 @@ export default function UserList({ users, onDelete, onUpdate }) {
   };
 
   return (
-    <table border="1" cellPadding="8">
-      <thead>
+    <table className="table table-striped">
+      <thead className="table-dark">
         <tr>
           <th>Name</th>
           <th>Email</th>
@@ -29,13 +29,17 @@ export default function UserList({ users, onDelete, onUpdate }) {
       <tbody>
         {users.map((u) => (
           <tr key={u._id}>
-            <td onClick={() => navigate(`/users/${u._id}/todos`)} style={{ cursor: "pointer", color: "blue" }}>
+            <td
+              onClick={() => navigate(`/users/${u._id}/todos`)}
+              style={{ cursor: "pointer", color: "blue" }}
+            >
               {editingId === u._id ? (
                 <input
                   value={editData.name}
                   onChange={(e) =>
                     setEditData({ ...editData, name: e.target.value })
                   }
+                  className="form-control"
                 />
               ) : (
                 u.name
@@ -48,6 +52,7 @@ export default function UserList({ users, onDelete, onUpdate }) {
                   onChange={(e) =>
                     setEditData({ ...editData, email: e.target.value })
                   }
+                  className="form-control"
                 />
               ) : (
                 u.email
@@ -60,6 +65,7 @@ export default function UserList({ users, onDelete, onUpdate }) {
                   onChange={(e) =>
                     setEditData({ ...editData, age: e.target.value })
                   }
+                  className="form-control"
                 />
               ) : (
                 u.age
@@ -68,13 +74,33 @@ export default function UserList({ users, onDelete, onUpdate }) {
             <td>
               {editingId === u._id ? (
                 <>
-                  <button onClick={() => saveEdit(u._id)}>Save</button>
-                  <button onClick={() => setEditingId(null)}>Cancel</button>
+                  <button
+                    onClick={() => saveEdit(u._id)}
+                    className="btn btn-success btn-sm me-1"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={() => setEditingId(null)}
+                    className="btn btn-secondary btn-sm"
+                  >
+                    Cancel
+                  </button>
                 </>
               ) : (
                 <>
-                  <button onClick={() => startEdit(u)}>Edit</button>
-                  <button onClick={() => onDelete(u._id)}>Delete</button>
+                  <button
+                    onClick={() => startEdit(u)}
+                    className="btn btn-warning btn-sm me-1"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => onDelete(u._id)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
                 </>
               )}
             </td>

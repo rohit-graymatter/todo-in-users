@@ -33,9 +33,11 @@ export default function TodosPage() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <Link to="/">← Back to Users</Link>
-      <h1>User Todos</h1>
+    <div className="container mt-5">
+      <Link to="/" className="btn btn-secondary mb-3">
+        ← Back to Users
+      </Link>
+      <h1 className="text-center mb-4">User Todos</h1>
       <TodoForm onSubmit={addTodo} />
       <TodoList todos={todos} onDelete={deleteTodo} onUpdate={updateTodo} />
     </div>

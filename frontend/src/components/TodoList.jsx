@@ -15,8 +15,8 @@ export default function TodoList({ todos, onDelete, onUpdate }) {
   };
 
   return (
-    <table border="1" cellPadding="8">
-      <thead>
+    <table className="table table-striped">
+      <thead className="table-dark">
         <tr>
           <th>Name</th>
           <th>Date</th>
@@ -29,6 +29,7 @@ export default function TodoList({ todos, onDelete, onUpdate }) {
             <td>
               {editingId === t._id ? (
                 <input
+                  className="form-control"
                   value={editData.name}
                   onChange={(e) =>
                     setEditData({ ...editData, name: e.target.value })
@@ -42,6 +43,7 @@ export default function TodoList({ todos, onDelete, onUpdate }) {
               {editingId === t._id ? (
                 <input
                   type="date"
+                  className="form-control"
                   value={editData.date?.split("T")[0]}
                   onChange={(e) =>
                     setEditData({ ...editData, date: e.target.value })
@@ -54,13 +56,33 @@ export default function TodoList({ todos, onDelete, onUpdate }) {
             <td>
               {editingId === t._id ? (
                 <>
-                  <button onClick={() => saveEdit(t._id)}>Save</button>
-                  <button onClick={() => setEditingId(null)}>Cancel</button>
+                  <button
+                    className="btn btn-success btn-sm me-1"
+                    onClick={() => saveEdit(t._id)}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => setEditingId(null)}
+                  >
+                    Cancel
+                  </button>
                 </>
               ) : (
                 <>
-                  <button onClick={() => startEdit(t)}>Edit</button>
-                  <button onClick={() => onDelete(t._id)}>Delete</button>
+                  <button
+                    className="btn btn-warning btn-sm me-1"
+                    onClick={() => startEdit(t)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => onDelete(t._id)}
+                  >
+                    Delete
+                  </button>
                 </>
               )}
             </td>
