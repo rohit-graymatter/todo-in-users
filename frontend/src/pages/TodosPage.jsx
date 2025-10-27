@@ -15,6 +15,27 @@ export default function TodosPage() {
 
   useEffect(() => {
     fetchTodos();
+
+    // SSE listener for real-time updates
+    const eventSource = new EventSource("http://localhost:5000/api/notifications");
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      // Only refresh todos for this user
+      if (data.message.includes(id)) {
+        fetchTodos();
+      } else {
+        // optionally ignore or still fetch if you want all updates
+        fetchTodos();
+      }
+    };
+
+    eventSource.onerror = () => {
+      console.error("EventSource failed. Closing connection.");
+      eventSource.close();
+    };
+
+    return () => eventSource.close();
   }, [id]);
 
   const addTodo = async (todo) => {
